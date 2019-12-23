@@ -1,5 +1,6 @@
 package org.techtown.push;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -7,8 +8,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -24,7 +27,10 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 
 public class FirstActivity extends AppCompatActivity {
@@ -52,6 +58,7 @@ public class FirstActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        //navigationView.setNavigationItemSelectedListener(this);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -63,18 +70,20 @@ public class FirstActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        // 윗부분 바탕을 클릭하면 로그인 창으로 이동
-        ImageView imageView = (ImageView)findViewById(R.id.imageView);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        View headView = navigationView.getHeaderView(0);
+        ImageView imgView = headView.findViewById(R.id.imageView);
+        imgView.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
 
-                Toast.makeText(FirstActivity.this, "", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(FirstActivity.this, MainActivity.class);
+                startActivity(intent);
 
             }
 
         });
+
     }
 
     @Override
