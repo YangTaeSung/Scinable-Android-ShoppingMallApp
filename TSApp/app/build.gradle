@@ -47,6 +47,8 @@ dependencies {
 
     implementation 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
 
+    implementation 'de.hdodenhof:circleimageview:2.0.0' /* for image view circular */
+
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -2,6 +2,9 @@ package org.techtown.push;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,6 +48,8 @@ public class FirstActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // 오른쪽 아래에 우표모양버튼 fab
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -70,9 +75,24 @@ public class FirstActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+
         View headView = navigationView.getHeaderView(0);
+
         ImageView imgView = headView.findViewById(R.id.imageView);
         imgView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(FirstActivity.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+
+        });
+
+        TextView textView1 = headView.findViewById(R.id.textView1);
+        textView1.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {

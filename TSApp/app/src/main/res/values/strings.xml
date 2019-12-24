@@ -24,5 +24,11 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="menu_outer">Outer</string>
+    <string name="menu_top">Top</string>
+    <string name="menu_bottom">Bottom</string>
+    <string name="menu_shoes">Shoes</string>
+
+    <string name="before_sign_in">Sign in here!</string>
 
 </resources>
