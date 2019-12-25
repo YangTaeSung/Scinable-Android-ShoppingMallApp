@@ -1,4 +1,4 @@
-package org.techtown.push.ui.home;
+package org.techtown.push.ui.shoes;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import org.techtown.push.R;
 
-public class HomeFragment extends Fragment {
+public class ShoesFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private ShoesViewModel shoesViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
+        shoesViewModel =
+                ViewModelProviders.of(this).get(ShoesViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_shoes, container, false);
+        final TextView textView = root.findViewById(R.id.text_shoes);
+        shoesViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

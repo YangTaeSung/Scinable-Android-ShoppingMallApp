@@ -3,31 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_main">
+
+    <!-- 메인 프레그먼트로 이용하지만 activity_main_drawer에 등록 안하면 네비게이션 메뉴에 뜨지 않음 -->
+    <fragment
+        android:id="@+id/nav_main"
+        android:name="org.techtown.push.ui.main.MainFragment"
+        android:label="@string/menu_main"
+        tools:layout="@layout/fragment_main" />
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="org.techtown.push.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_outer"
+        android:name="org.techtown.push.ui.outer.OuterFragment"
+        android:label="@string/menu_outer"
+        tools:layout="@layout/fragment_outer" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="org.techtown.push.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_top"
+        android:name="org.techtown.push.ui.top.TopFragment"
+        android:label="@string/menu_top"
+        tools:layout="@layout/fragment_top" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="org.techtown.push.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_bottom"
+        android:name="org.techtown.push.ui.bottom.BottomFragment"
+        android:label="@string/menu_bottom"
+        tools:layout="@layout/fragment_bottom" />
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="org.techtown.push.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        android:id="@+id/nav_shoes"
+        android:name="org.techtown.push.ui.shoes.ShoesFragment"
+        android:label="@string/menu_shoes"
+        tools:layout="@layout/fragment_shoes" />
 
     <fragment
         android:id="@+id/nav_share"

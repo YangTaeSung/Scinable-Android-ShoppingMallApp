@@ -28,17 +28,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.techtown.push.ui.main.MainFragment;
 import org.w3c.dom.Text;
 
 
 public class FirstActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    MainFragment mainFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +70,8 @@ public class FirstActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                R.id.nav_main, R.id.nav_outer, R.id.nav_top, R.id.nav_bottom,
+                R.id.nav_shoes, R.id.nav_share, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -76,6 +79,7 @@ public class FirstActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
+        /* nav_header_main.xml에 이미지나 텍스트뷰가 있을 때 해당 요소의 클릭이벤트리스너 작동방법
         View headView = navigationView.getHeaderView(0);
 
         ImageView imgView = headView.findViewById(R.id.imageView);
@@ -104,8 +108,12 @@ public class FirstActivity extends AppCompatActivity {
 
         });
 
+         */
+
     }
 
+
+    // 우측 상단의 메뉴 생성
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -118,6 +126,22 @@ public class FirstActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    // 우측 상단의 메뉴 클릭 시 동작
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+
+        switch (item.getItemId()) {
+
+            case R.id.action_mypage:
+                Intent intent = new Intent(this,MainActivity.class);
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
 }

@@ -13,6 +13,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+    <!-- 원래 있던거, 클릭했을 때 이벤트 동작 구현했었음 (FirstActivity)
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="50dp"
@@ -38,5 +39,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
+    -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
