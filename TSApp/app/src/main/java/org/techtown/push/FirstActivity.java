@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -28,19 +30,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.techtown.push.ui.main.MainFragment;
-import org.w3c.dom.Text;
 
 
 public class FirstActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+
     MainFragment mainFragment;
 
     @Override
@@ -54,6 +52,33 @@ public class FirstActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        //mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.nav_main);
+        mainFragment = new MainFragment();
+
+        toolbar.findViewById(R.id.cover_image).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getApplicationContext(),"dd",Toast.LENGTH_LONG).show(); // 토스트는 동작하지만 프래그먼트 전환은 오류
+
+                FragmentManager fragmentManager = getSupportFragmentManager(); // 프래그먼트 매니저 선언
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction(); // 프래그먼트 트랜잭션 시작
+
+                /* 여기에서 프래그먼트 트랜잭션, 백스택, 애니메이션 등을 설정합니다. */
+                fragmentTransaction.remove(mainFragment);
+                fragmentTransaction.replace(R.id.nav_host_fragment,mainFragment); // 프래그먼트 변경
+                fragmentTransaction.addToBackStack(null); // 이전 트랜잭션을 백스택에 저장
+                fragmentTransaction.commit(); // 프래그먼트 트랜잭션 마무리
+
+
+                //getSupportFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
+
+            }
+
+        });
+
+
         // 오른쪽 아래에 우표모양버튼 fab
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +91,7 @@ public class FirstActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        //navigationView.setNavigationItemSelectedListener(this);
+        // navigationView.setNavigationItemSelectedListener(this);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -143,5 +168,6 @@ public class FirstActivity extends AppCompatActivity {
         }
 
     }
+
 
 }
