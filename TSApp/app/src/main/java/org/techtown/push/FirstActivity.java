@@ -15,8 +15,13 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,10 +35,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import org.techtown.push.ui.bottom.BottomFragment;
 import org.techtown.push.ui.main.MainFragment;
+import org.techtown.push.ui.main.MainViewModel;
 
+// setText를 없애고 책에 나온 방법대로 해보던지
 
 public class FirstActivity extends AppCompatActivity {
 
@@ -52,7 +62,7 @@ public class FirstActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        //mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.nav_main);
+
         mainFragment = new MainFragment();
 
         toolbar.findViewById(R.id.cover_image).setOnClickListener(new View.OnClickListener() {
@@ -60,19 +70,21 @@ public class FirstActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getApplicationContext(),"dd",Toast.LENGTH_LONG).show(); // 토스트는 동작하지만 프래그먼트 전환은 오류
+                Intent intent = new Intent(getApplicationContext(),FirstActivity.class);
+                startActivity(intent);
+
+                /* 타이틀 누르면 처음화면으로 돌아가기 위해 프래그먼트에 관하여 학습(위의 인텐트로 해결)
 
                 FragmentManager fragmentManager = getSupportFragmentManager(); // 프래그먼트 매니저 선언
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction(); // 프래그먼트 트랜잭션 시작
 
-                /* 여기에서 프래그먼트 트랜잭션, 백스택, 애니메이션 등을 설정합니다. */
-                fragmentTransaction.remove(mainFragment);
-                fragmentTransaction.replace(R.id.nav_host_fragment,mainFragment); // 프래그먼트 변경
+                /* 여기에서 프래그먼트 트랜잭션, 백스택, 애니메이션 등을 설정합니다.
+                fragmentTransaction.remove(mainFragment).commitAllowingStateLoss(); // 프래그먼트 삭제
+                fragmentTransaction.replace(R.id.container,mainFragment); // 프래그먼트 변경
                 fragmentTransaction.addToBackStack(null); // 이전 트랜잭션을 백스택에 저장
                 fragmentTransaction.commit(); // 프래그먼트 트랜잭션 마무리
 
-
-                //getSupportFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
+                 */
 
             }
 
@@ -82,12 +94,17 @@ public class FirstActivity extends AppCompatActivity {
         // 오른쪽 아래에 우표모양버튼 fab
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
             }
+
         });
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -168,6 +185,5 @@ public class FirstActivity extends AppCompatActivity {
         }
 
     }
-
 
 }

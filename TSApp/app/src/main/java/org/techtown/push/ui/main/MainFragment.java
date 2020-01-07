@@ -18,18 +18,27 @@ public class MainFragment extends Fragment {
 
     private MainViewModel mainViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        mainViewModel =
-                ViewModelProviders.of(this).get(MainViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_main, container, false);
+
         final TextView textView = root.findViewById(R.id.text_main);
+
         mainViewModel.getText().observe(this, new Observer<String>() {
+
             @Override
             public void onChanged(@Nullable String s) {
+
                 textView.setText(s);
+
             }
+
         });
+
         return root;
+
     }
+
 }

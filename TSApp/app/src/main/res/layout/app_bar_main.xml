@@ -20,16 +20,27 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:theme="@style/ToolbarColoredBackArrow">
 
-            <ImageView
-                android:id="@+id/cover_image"
+            <!--
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="201GARAGE"
                 android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:contentDescription="cover main image"
-                android:scaleType="centerCrop"
-                android:visibility="visible"
-                app:srcCompat="@drawable/cover" />
+                android:id="@+id/toolbar_title"
+                android:textSize="20sp"
+                />
+             -->
+
+                        <ImageView
+                            android:id="@+id/cover_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:adjustViewBounds="true"
+                            android:contentDescription="cover main image"
+                            android:scaleType="centerCrop"
+                            android:visibility="visible"
+                            app:srcCompat="@drawable/cover" />
 
         </androidx.appcompat.widget.Toolbar>
 
