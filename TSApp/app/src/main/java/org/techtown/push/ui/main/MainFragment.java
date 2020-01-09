@@ -24,9 +24,9 @@ public class MainFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-        final TextView textView = root.findViewById(R.id.text_main);
+        /* final TextView textView = root.findViewById(R.id.text_main);
 
-        mainViewModel.getText().observe(this, new Observer<String>() {
+          mainViewModel.getText().observe(this, new Observer<String>() {
 
             @Override
             public void onChanged(@Nullable String s) {
@@ -35,7 +35,7 @@ public class MainFragment extends Fragment {
 
             }
 
-        });
+        }); */
 
         return root;
 

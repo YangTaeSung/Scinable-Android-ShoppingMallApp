@@ -22,15 +22,15 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_share">201Garage Introduction</string>
+    <string name="menu_send">찾아오시는 길</string>
 
     <!-- 직접 정의한 부분 -->
-    <string name="menu_main">Main</string>
-    <string name="menu_outer">Outer</string>
-    <string name="menu_top">Top</string>
-    <string name="menu_bottom">Bottom</string>
-    <string name="menu_shoes">Shoes</string>
+    <string name="menu_main">세차</string>
+    <string name="menu_outer">광택</string>
+    <string name="menu_top">유리막 코팅</string>
+    <string name="menu_bottom">실내 크리닝</string>
+    <string name="menu_shoes">PPF</string>
 
     <string name="before_sign_in">Sign in here!</string>
 

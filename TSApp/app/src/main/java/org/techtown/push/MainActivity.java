@@ -1,6 +1,7 @@
 package org.techtown.push;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.NotificationManager;
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ActionBar ab = getSupportActionBar() ;
+        ab.setTitle("201Garage 로그인") ;
 
         //---------------------------------Google login--------------------------------------------//
 

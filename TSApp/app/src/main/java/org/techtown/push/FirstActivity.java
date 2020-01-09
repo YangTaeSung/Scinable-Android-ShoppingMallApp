@@ -65,7 +65,7 @@ public class FirstActivity extends AppCompatActivity {
 
         mainFragment = new MainFragment();
 
-        toolbar.findViewById(R.id.cover_image).setOnClickListener(new View.OnClickListener() {
+        toolbar.findViewById(R.id.garage_image).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
