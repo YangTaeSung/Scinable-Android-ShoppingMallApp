@@ -8,6 +8,14 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main">
 
+    <!--
+    Navigation Graph에 정의한 Destination들을 보여주기 위해서는 새로운 widget인 NavHostFragment을
+    이용해야 합니다.
+    NavHostFragment는 Fragment를 상속하고 NavHost 인터페이스를 구현하고 있는데, NavController를 반환하는
+    인터페이스입니다.
+    app:navGraph 속성을 통해 Navigation Graph를 설정하고, app:defaultNavHost="true"를 통해 System의
+    back button 이벤트를 intercept 할 수 있습니다.
+    -->
     <fragment
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"

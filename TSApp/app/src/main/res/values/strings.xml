@@ -22,16 +22,28 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
-    <string name="menu_share">201Garage Introduction</string>
-    <string name="menu_send">찾아오시는 길</string>
+    <string name="menu_share">공지사항</string>
+    <string name="menu_send">문의사항</string>
 
     <!-- 직접 정의한 부분 -->
     <string name="menu_main">세차</string>
-    <string name="menu_outer">광택</string>
-    <string name="menu_top">유리막 코팅</string>
-    <string name="menu_bottom">실내 크리닝</string>
+    <string name="menu_outer">201Garage Introduction</string>
+    <string name="menu_top">새차</string>
+    <string name="menu_bottom">광택</string>
     <string name="menu_shoes">PPF</string>
 
     <string name="before_sign_in">Sign in here!</string>
+
+    <string name="country_prompt">Choose a country</string>
+    <string-array name="country_arrays">
+        <item>Malaysia</item>
+        <item>United States</item>
+        <item>Indonesia</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Singapore</item>
+        <item>New Zealand</item>
+        <item>India</item>
+    </string-array>
 
 </resources>

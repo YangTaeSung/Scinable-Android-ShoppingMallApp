@@ -34,7 +34,7 @@ public class OuterFragment extends Fragment {
         // 프래그먼트를 액티비티에 추가하는 방법은 1.코드(java) 2.태그(xml)이 있는데 여기서는 태그로 추가됨 (mobile_navigation)
         // rootView라는 뷰그룹 객체가 생성되고 이를 반환하는게 프래그먼트 기본사항
         final View rootView = inflater.inflate(R.layout.fragment_outer, container, false);
-
+/*
         ImageView imageView = rootView.findViewById(R.id.product);
         imageView.setOnClickListener(new View.OnClickListener() {
 
@@ -51,13 +51,17 @@ public class OuterFragment extends Fragment {
 
         });
 
-        final TextView textView = rootView.findViewById(R.id.text_outer);
+        final TextView text_outer = rootView.findViewById(R.id.text_outer);
         outerViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                text_outer.setText(s);
             }
         });
+        */
+
+
+
         return rootView;
     }
 }

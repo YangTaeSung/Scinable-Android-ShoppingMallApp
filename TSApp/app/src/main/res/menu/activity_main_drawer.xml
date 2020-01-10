@@ -8,6 +8,10 @@
             android:id="@+id/nav_outer"
             android:icon="@drawable/outer"
             android:title="@string/menu_outer" />
+    </group>
+
+    <item android:title="Product">
+        <menu>
         <item
             android:id="@+id/nav_top"
             android:icon="@drawable/top"
@@ -20,7 +24,9 @@
             android:id="@+id/nav_shoes"
             android:icon="@drawable/shoes"
             android:title="@string/menu_shoes" />
-    </group>
+        </menu>
+    </item>
+
 
     <item android:title="Communicate">
         <menu>

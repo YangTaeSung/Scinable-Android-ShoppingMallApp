@@ -10,7 +10,7 @@ public class OuterViewModel extends ViewModel {
 
     public OuterViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is outer fragment");
+        mText.setValue("201Garage Introduction");
     }
 
     public LiveData<String> getText() {

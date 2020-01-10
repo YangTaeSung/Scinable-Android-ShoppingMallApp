@@ -3,40 +3,88 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack">
 
-    <TextView
-        android:id="@+id/text_outer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <LinearLayout
-        android:layout_width="412dp"
-        android:layout_height="668dp"
-        android:orientation="horizontal"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_outer">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/product"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/desert" />
-    </LinearLayout>
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/product"
+                android:layout_width="match_parent"
+                android:layout_height="274dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/desert" />
+
+            <TextView
+                android:id="@+id/text_introduction_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:layout_weight="1"
+                android:text="Introduction"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/text_introudction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:text="201Garage is Car Deatiling Service Center at Naju. Thank you for using our service. "
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/text_presenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:text="Representative director : Seung-jin Kim"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/text_presenter2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:text="President : Seung-wan Kim"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="292dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/g0ff" />
+        </LinearLayout>
+
+    </ScrollView>
 
     <!-- 앱 결제먼저 구현하고 상품등록해야될 부분
     <ImageView

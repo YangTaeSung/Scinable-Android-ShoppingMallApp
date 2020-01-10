@@ -47,4 +47,5 @@
         android:name="org.techtown.push.ui.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
+
 </navigation>
