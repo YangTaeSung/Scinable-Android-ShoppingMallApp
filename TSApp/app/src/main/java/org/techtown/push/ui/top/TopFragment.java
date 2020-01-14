@@ -67,13 +67,44 @@ public class TopFragment extends Fragment {
 
         */
 
-        Button button = root.findViewById(R.id.button);
+        // 구매하기 버튼에 대한 동작
+        Button button = root.findViewById(R.id.sell_button);
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getActivity(),"ff",Toast.LENGTH_LONG).show();
+                if(String.valueOf(spinner.getSelectedItem()).equals("선택")) { // 스피너의 옵션을 선택하지 않은 경우
+
+                    Toast.makeText(getActivity(), "옵션을 선택해주세요.", Toast.LENGTH_LONG).show();
+
+                } else { // 구매하는 페이지로 넘어가기
+
+                    Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+
+        });
+
+
+        // 장바구니 담기버튼에 대한 동작
+        Button button2 = root.findViewById(R.id.cart_button);
+        button2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if(String.valueOf(spinner.getSelectedItem()).equals("선택")) { // 스피너의 옵션을 선택하지 않은 경우
+
+                    Toast.makeText(getActivity(), "옵션을 선택해주세요.", Toast.LENGTH_LONG).show();
+
+                } else { // 장바구니에 담기는 동작
+
+                    Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
+
+                }
 
             }
 

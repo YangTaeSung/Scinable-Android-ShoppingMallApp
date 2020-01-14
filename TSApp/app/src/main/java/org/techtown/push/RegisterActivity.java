@@ -46,9 +46,12 @@ public class RegisterActivity extends AppCompatActivity {
 */
 
 
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference();
+
     private FirebaseAuth mAuth;
 
-    private EditText editTextEmail, editTextPassword;
+    private EditText editTextEmail, editTextPassword, editTextName, editTextPhone;
     private Button registerButton;
 
     @Override
@@ -56,35 +59,26 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-/* Database part
+        ActionBar ab = getSupportActionBar() ;
+        ab.setTitle("201Garage 회원가입") ;
 
-        conditionRef.addValueEventListener(new ValueEventListener() {
+/* Firebase Database Test
+        Button testButton = findViewById(R.id.testButton);
+        testButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // String text = dataSnapshot.getValue(String.class);
-                // textView.setText(text);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+            public void onClick(View view) {
+                databaseReference.child("message").push().setValue("2");
             }
         });
 
-        //  button.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //     public void onClick(View v) {
-        //          conditionRef.setValue(editText.getText().toString());
-        //       }
-        //  });
-
-*/
-
+ */
 
         mAuth = FirebaseAuth.getInstance();
 
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword= findViewById(R.id.editTextPassword);
+        editTextName = findViewById(R.id.editTextName);
+        editTextPhone = findViewById(R.id.editTextPhone);
         registerButton = findViewById(R.id.bt_Register);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +99,12 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign up success
                             Toast.makeText(RegisterActivity.this, "Signed up Success", Toast.LENGTH_SHORT).show();
-                           // <-- Database part --> conditionRef.setValue(editTextEmail.getText().toString());
+
+                            String userId = editTextEmail.getText().toString();
+                            String name = editTextName.getText().toString();
+                            String phoneNumber = editTextPhone.getText().toString();
+                            addUserToFirebaseDB(userId, name, phoneNumber);
+
                             finish();
                         } else {
                             // Sign up failed -> 1. ID is already exist.
@@ -116,6 +115,14 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void addUserToFirebaseDB(final String userId, String name, String phoneNumber) {
+
+        User user = new User(name, phoneNumber);
+
+        databaseReference.child("users").child(userId).setValue(user);
+
     }
 
 }

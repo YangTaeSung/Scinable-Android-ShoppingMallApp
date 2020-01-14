@@ -34,16 +34,12 @@
 
     <string name="before_sign_in">Sign in here!</string>
 
-    <string name="country_prompt">Choose a country</string>
+    <!-- 스피너 옵션들 -->
+    <string name="country_prompt">옵션선택</string>
     <string-array name="country_arrays">
-        <item>Malaysia</item>
-        <item>United States</item>
-        <item>Indonesia</item>
-        <item>France</item>
-        <item>Italy</item>
-        <item>Singapore</item>
-        <item>New Zealand</item>
-        <item>India</item>
+        <item>선택</item>
+        <item>새차 1회권 (40000원)</item>
+        <item>새차 10회권 (360000원)</item>
     </string-array>
 
 </resources>
