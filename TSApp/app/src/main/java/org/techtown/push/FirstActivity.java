@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -28,6 +29,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -47,6 +54,8 @@ import org.techtown.push.ui.main.MainViewModel;
 
 public class FirstActivity extends AppCompatActivity {
 
+    private FirebaseDatabase database;
+
     private AppBarConfiguration mAppBarConfiguration;
 
     MainFragment mainFragment;
@@ -62,6 +71,25 @@ public class FirstActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        database = FirebaseDatabase.getInstance();
+
+        ////////////////////////여기 하던 중, 테스트 돌리기부터 해
+        database.getReference().child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e("mainactivity", "key=" + dataSnapshot.getKey() + ", " + dataSnapshot.getValue() );
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        // currentUserGreeting();
 
         mainFragment = new MainFragment();
 
@@ -182,6 +210,21 @@ public class FirstActivity extends AppCompatActivity {
                 startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    public void currentUserGreeting() {
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
+
+            // 따로 설정해주지 않았다면 email과 photoUrl은 null로 출력
+            Toast.makeText(FirstActivity.this, name + "님" + email + "님" + photoUrl + "님", Toast.LENGTH_SHORT).show();
         }
 
     }

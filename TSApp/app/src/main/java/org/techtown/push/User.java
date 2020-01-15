@@ -2,17 +2,17 @@ package org.techtown.push;
 
 public class User {
 
-    public String username;
-    public String email;
+    public String userName;
+    public String phoneNumber;
 
     public User() {
 
     }
 
-    public User(String username, String email) {
+    public User(String userName, String phoneNumber) {
 
-        this.username = username;
-        this.email = email;
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
 
     }
 

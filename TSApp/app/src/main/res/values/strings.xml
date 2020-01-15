@@ -25,7 +25,9 @@
     <string name="menu_share">공지사항</string>
     <string name="menu_send">문의사항</string>
 
-    <!-- 직접 정의한 부분 -->
+    <string name="title_garage">garage main image</string>
+
+    <!-- 새로 정의한 네비게이션 메뉴 부분 -->
     <string name="menu_main">세차</string>
     <string name="menu_outer">201Garage Introduction</string>
     <string name="menu_top">새차</string>

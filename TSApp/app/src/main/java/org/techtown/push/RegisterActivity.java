@@ -38,17 +38,11 @@ import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 public class RegisterActivity extends AppCompatActivity {
 
-/* Database part
-
-    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference conditionRef = mRootRef.child("text");
-
-*/
-
-
+    // 데이터베이스
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
+    // 로그인
     private FirebaseAuth mAuth;
 
     private EditText editTextEmail, editTextPassword, editTextName, editTextPhone;
@@ -62,17 +56,6 @@ public class RegisterActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar() ;
         ab.setTitle("201Garage 회원가입") ;
 
-/* Firebase Database Test
-        Button testButton = findViewById(R.id.testButton);
-        testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                databaseReference.child("message").push().setValue("2");
-            }
-        });
-
- */
-
         mAuth = FirebaseAuth.getInstance();
 
         editTextEmail = findViewById(R.id.editTextEmail);
@@ -84,14 +67,21 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+
+                String userId = editTextEmail.getText().toString();
+                String userIdForDB = userIdUpdateForInsertDB(userId); // DB에 들어갈 때 '.' 포함하면 안되서 '_'로 대체해주기
+                String name = editTextName.getText().toString();
+                String phoneNumber = editTextPhone.getText().toString();
+
+                createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString(), userIdForDB, name, phoneNumber);
             }
         });
     }
 
     // When sign up, should conform to forms ( this form -> ******@****.*** )!!!!!!!!!!!
     // Sign up code is only this one ( including email_login_button code in onCreate() )
-    private void createUser(final String email, final String password) {
+    private void createUser(final String email, final String password, final String userIdForDB, final String name, final String phoneNumber) {
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -100,10 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                             // Sign up success
                             Toast.makeText(RegisterActivity.this, "Signed up Success", Toast.LENGTH_SHORT).show();
 
-                            String userId = editTextEmail.getText().toString();
-                            String name = editTextName.getText().toString();
-                            String phoneNumber = editTextPhone.getText().toString();
-                            addUserToFirebaseDB(userId, name, phoneNumber);
+                            addUserToFirebaseDB(userIdForDB, name, phoneNumber);
 
                             finish();
                         } else {
@@ -117,12 +104,16 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
-    public void addUserToFirebaseDB(final String userId, String name, String phoneNumber) {
-
+    // Invalid Firebase Database path: tsy06668@naver.com. Firebase Database paths must not contain '.', '#', '$', '[', or ']'
+    // DB에 들어갈 자료는 위의 특수문자를 포함하지 않아야 한다.
+    public void addUserToFirebaseDB(String userId, String name, String phoneNumber) {
         User user = new User(name, phoneNumber);
-
         databaseReference.child("users").child(userId).setValue(user);
+    }
 
+    // DB에 들어갈 때 '.' 포함하면 안되서 '_'로 대체해주기
+    public String userIdUpdateForInsertDB(String userId) {
+        return userId.replace(".","_");
     }
 
 }

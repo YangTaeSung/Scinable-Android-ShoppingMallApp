@@ -20,7 +20,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:theme="@style/ToolbarColoredBackArrow">
 
-<!--
+            <!-- 타이틀 부분 텍스트로 지정하기
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
-                android:contentDescription="garage main image"
+                android:contentDescription="@string/title_garage"
                 android:scaleType="centerCrop"
                 android:visibility="visible"
                 app:srcCompat="@drawable/title" />

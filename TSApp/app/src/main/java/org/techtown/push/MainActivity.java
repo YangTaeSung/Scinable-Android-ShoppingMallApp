@@ -34,9 +34,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
-    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = firebaseDatabase.getReference();
-
     private static final int RC_SIGN_IN = 1000;
     private FirebaseAuth mAuth;
     private GoogleApiClient mGoogleApiClient;
@@ -125,15 +122,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(MainActivity.this, "Email Login Success",Toast.LENGTH_SHORT).show();
-
-                            FirebaseUser user = mAuth.getCurrentUser();
-
-                            String cu = mAuth.getUid();
-                            String name = user.getDisplayName();
-                            String email = user.getEmail();
-                            String photoUrl = user.getPhotoUrl().toString();
-                            String phone = user.getPhoneNumber();
-
 
                             Intent intent = new Intent(MainActivity.this,FirstActivity.class);
                             startActivity(intent);
