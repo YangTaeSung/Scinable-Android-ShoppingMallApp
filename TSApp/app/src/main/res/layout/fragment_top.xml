@@ -27,7 +27,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@color/colorAccent">
+                android:background="@color/colorGray">
 
                 <ImageView
                     android:id="@+id/imageView7"
@@ -59,6 +59,7 @@
                     android:layout_height="wrap_content"
                     android:entries="@array/country_arrays"
                     android:prompt="@string/country_prompt"
+                    android:layout_marginTop="15dp"
                     />
 
 
@@ -67,7 +68,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="구매하기" />
+                    android:text="구매하기"
+                    android:layout_marginTop="15dp"/>
 
                 <Button
                     android:id="@+id/cart_button"
