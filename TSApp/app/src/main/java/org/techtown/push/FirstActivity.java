@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -31,6 +33,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -50,15 +53,11 @@ import org.techtown.push.ui.bottom.BottomFragment;
 import org.techtown.push.ui.main.MainFragment;
 import org.techtown.push.ui.main.MainViewModel;
 
-// setText를 없애고 책에 나온 방법대로 해보던지
-
 public class FirstActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
 
     private AppBarConfiguration mAppBarConfiguration;
-
-    MainFragment mainFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,33 +65,69 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
+        /* 툴바 설정 */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+
+        /* 데이터베이스에서 현재 로그인 유저의 메일, 이름 정보 가져오기 */
         database = FirebaseDatabase.getInstance();
+        String userId = "";
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        ////////////////////////여기 하던 중, 테스트 돌리기부터 해
-        database.getReference().child("users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.e("mainactivity", "key=" + dataSnapshot.getKey() + ", " + dataSnapshot.getValue() );
+        if (user != null) {
+
+            // 데이터베이스에 참조하여 userName을 가져오기 위해(네비게이션 드로어 헤더에 띄어줌)
+            // 프로필에 저장된 이메일을 가져온다.(이메일 로그인 시에 프로필의 이메일 부분에
+            // 자동으로 아이디가 입력됨)
+            // 데이터베이스에 저장된 형식은 <tsy0668@naver_com>이므로 언더바 부분을 변형하여 찾는다.
+            userId = userIdUpdateForReferenceDB(user.getEmail());
+
+            // addValueEventListener : 글자가 하나씩 바뀔때마다 클라이언트에 알려주는 리스너
+            // onDataChange로 넘어온다.
+            database.getReference().child("users").child(userId).child("userName").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    // database.getReference() 테스트용 로그
+                    // dataSnapshot.getValue()에 userName이 찍히는 것을 볼 수 있다.
+                    Log.e("mainactivity", "key=" + dataSnapshot.getKey() + ", " + dataSnapshot.getValue());
+
+                    // 네비게이션 드로어의 헤더부분에 로그인 유저의 이름과 이메일 출력
+                    // 회원가입 시 등록했던 유저의 이름이 데이터베이스에 저장되어 있고
+                    // 그 이름을 가져와서 사용자 프로필에 등록한다.
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(dataSnapshot.getValue().toString())
+                            .build();
+
+                    user.updateProfile(profileUpdates)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("", "User profile updated.");
+                                    }
+                                }
+                            });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
 
 
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
+        /* 사용자 프로필 확인용 토스트메세지 출력 */
         // currentUserGreeting();
 
-        mainFragment = new MainFragment();
 
+        /* 툴바 타이틀을 클릭 시에 메인화면으로 화면 전환 */
         toolbar.findViewById(R.id.garage_image).setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -102,7 +137,6 @@ public class FirstActivity extends AppCompatActivity {
                 startActivity(intent);
 
                 /* 타이틀 누르면 처음화면으로 돌아가기 위해 프래그먼트에 관하여 학습(위의 인텐트로 해결)
-
                 FragmentManager fragmentManager = getSupportFragmentManager(); // 프래그먼트 매니저 선언
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction(); // 프래그먼트 트랜잭션 시작
 
@@ -134,6 +168,7 @@ public class FirstActivity extends AppCompatActivity {
         });
 
 
+        /* 네비게이션 드로어 설정 */
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // navigationView.setNavigationItemSelectedListener(this);
@@ -149,9 +184,11 @@ public class FirstActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
-        /* nav_header_main.xml에 이미지나 텍스트뷰가 있을 때 해당 요소의 클릭이벤트리스너 작동방법
+        /* nav_header_main.xml에 이미지나 텍스트뷰가 있을 때 해당 요소의 클릭이벤트리스너 작동방법 */
         View headView = navigationView.getHeaderView(0);
 
+        // TextView도 동일
+        /*
         ImageView imgView = headView.findViewById(R.id.imageView);
         imgView.setOnClickListener(new View.OnClickListener() {
 
@@ -164,21 +201,17 @@ public class FirstActivity extends AppCompatActivity {
             }
 
         });
+        */
 
-        TextView textView1 = headView.findViewById(R.id.textView1);
-        textView1.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(FirstActivity.this, MainActivity.class);
-                startActivity(intent);
-
-            }
-
-        });
-
-         */
+        // 네비게이션 드로어 헤더부분 사용자 이름, 이메일
+        TextView userName_text = (TextView) headView.findViewById(R.id.userName_text);
+        TextView userName_text2 = (TextView) headView.findViewById(R.id.userName_text2);
+        TextView userEmail_text = (TextView) headView.findViewById(R.id.userEmail_text);
+        userName_text.setText(user.getDisplayName());
+        if(user.getDisplayName()!=null) {
+            userName_text2.setText(" 님");
+        }
+        userEmail_text.setText(user.getEmail());
 
     }
 
@@ -191,12 +224,14 @@ public class FirstActivity extends AppCompatActivity {
         return true;
     }
 
+
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 
     // 우측 상단의 메뉴 클릭 시 동작
     @Override
@@ -214,7 +249,9 @@ public class FirstActivity extends AppCompatActivity {
 
     }
 
-    public void currentUserGreeting() {
+
+    // 프로필 설정 확인용 메소드
+    /* public void currentUserGreeting() {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -226,6 +263,13 @@ public class FirstActivity extends AppCompatActivity {
             // 따로 설정해주지 않았다면 email과 photoUrl은 null로 출력
             Toast.makeText(FirstActivity.this, name + "님" + email + "님" + photoUrl + "님", Toast.LENGTH_SHORT).show();
         }
+
+    } */
+
+
+    public String userIdUpdateForReferenceDB(String userId) {
+
+        return userId.replace(".","_");
 
     }
 
