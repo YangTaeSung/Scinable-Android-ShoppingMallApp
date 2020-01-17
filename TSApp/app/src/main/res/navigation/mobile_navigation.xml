@@ -22,19 +22,40 @@
         android:id="@+id/nav_top"
         android:name="org.techtown.push.ui.top.TopFragment"
         android:label="@string/menu_top"
-        tools:layout="@layout/fragment_top" />
+        tools:layout="@layout/fragment_top" >
+        <action
+            android:id="@+id/action_nav_top_to_nav_cart"
+            app:destination="@id/nav_cart" />
+        <action
+            android:id="@+id/action_nav_top_to_nav_buy"
+            app:destination="@id/nav_buy" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_bottom"
         android:name="org.techtown.push.ui.bottom.BottomFragment"
         android:label="@string/menu_bottom"
-        tools:layout="@layout/fragment_bottom" />
+        tools:layout="@layout/fragment_bottom" >
+        <action
+            android:id="@+id/action_nav_bottom_to_nav_cart"
+            app:destination="@id/nav_cart" />
+        <action
+            android:id="@+id/action_nav_bottom_to_nav_buy"
+            app:destination="@id/nav_buy" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_shoes"
         android:name="org.techtown.push.ui.shoes.ShoesFragment"
         android:label="@string/menu_shoes"
-        tools:layout="@layout/fragment_shoes" />
+        tools:layout="@layout/fragment_shoes" >
+        <action
+            android:id="@+id/action_nav_shoes_to_nav_cart"
+            app:destination="@id/nav_cart" />
+        <action
+            android:id="@+id/action_nav_shoes_to_nav_buy"
+            app:destination="@id/nav_buy" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_share"
@@ -47,5 +68,30 @@
         android:name="org.techtown.push.ui.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
+
+    <fragment
+        android:id="@+id/nav_cart"
+        android:name="org.techtown.push.ui.cart.CartFragment"
+        tools:layout="@layout/fragment_cart" />
+
+    <fragment
+        android:id="@+id/nav_buy"
+        android:name="org.techtown.push.ui.buy.BuyFragment"
+        tools:layout="@layout/fragment_buy" />
+
+    <fragment
+        android:id="@+id/nav_full"
+        android:name="org.techtown.push.ui.full.FullFragment"
+        tools:layout="@layout/fragment_full" >
+        <action
+            android:id="@+id/action_nav_full_to_nav_cart"
+            app:destination="@id/nav_cart" />
+        <action
+            android:id="@+id/action_nav_full_to_nav_buy"
+            app:destination="@id/nav_buy" />
+    </fragment>
+
+
+
 
 </navigation>

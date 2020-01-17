@@ -27,6 +27,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -50,6 +51,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.techtown.push.ui.bottom.BottomFragment;
+import org.techtown.push.ui.cart.CartFragment;
 import org.techtown.push.ui.main.MainFragment;
 import org.techtown.push.ui.main.MainViewModel;
 
@@ -153,6 +155,7 @@ public class FirstActivity extends AppCompatActivity {
         });
 
 
+        /* 프래그먼트로 이동하는 방법 못찾음 일단 안씀
         // 오른쪽 아래에 우표모양버튼 fab
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -165,7 +168,7 @@ public class FirstActivity extends AppCompatActivity {
 
             }
 
-        });
+        }); */
 
 
         /* 네비게이션 드로어 설정 */

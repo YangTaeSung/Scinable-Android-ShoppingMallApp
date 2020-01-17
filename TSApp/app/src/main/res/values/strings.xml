@@ -28,11 +28,12 @@
     <string name="title_garage">garage main image</string>
 
     <!-- 새로 정의한 네비게이션 메뉴 부분 -->
-    <string name="menu_main">세차</string>
+    <string name="menu_main">main</string>
     <string name="menu_outer">201Garage Introduction</string>
-    <string name="menu_top">새차</string>
-    <string name="menu_bottom">광택</string>
-    <string name="menu_shoes">PPF</string>
+    <string name="menu_top">프리미엄 세차</string>
+    <string name="menu_bottom">디테일링 세차</string>
+    <string name="menu_shoes">실내 집중 클리닝</string>
+    <string name="menu_full">풀 디테일링 세차</string>
 
     <string name="before_sign_in">Sign in here!</string>
 
@@ -40,8 +41,29 @@
     <string name="country_prompt">옵션선택</string>
     <string-array name="country_arrays">
         <item>선택</item>
-        <item>새차 1회권 (40000원)</item>
-        <item>새차 10회권 (360000원)</item>
+        <item>프리미엄 세차 1회권 (40000원)</item>
+        <item>프리미엄 세차 10회권 (360000원)</item>
+    </string-array>
+
+    <string name="country_prompt_d">옵션선택</string>
+    <string-array name="country_arrays_d">
+        <item>선택</item>
+        <item>디테일링 세차 1회권 (100000원)</item>
+        <item>디테일링 세차 10회권 (900000원)</item>
+    </string-array>
+
+    <string name="country_prompt_i">옵션선택</string>
+    <string-array name="country_arrays_i">
+        <item>선택</item>
+        <item>실내 집중 클리닝 1회권 (120000원)</item>
+        <item>실내 집중 클리닝 10회권 (1080000원)</item>
+    </string-array>
+
+    <string name="country_prompt_f">옵션선택</string>
+    <string-array name="country_arrays_f">
+        <item>선택</item>
+        <item>풀 디테일링 1회권 (180000원)</item>
+        <item>풀 디테일링 10회권 (1620000원)</item>
     </string-array>
 
 </resources>

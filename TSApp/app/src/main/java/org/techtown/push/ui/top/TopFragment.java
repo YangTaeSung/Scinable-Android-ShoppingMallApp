@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import org.techtown.push.R;
 
@@ -29,7 +30,7 @@ public class TopFragment extends Fragment {
     private Spinner spinner;
 
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         topViewModel = ViewModelProviders.of(this).get(TopViewModel.class);
         View root = inflater.inflate(R.layout.fragment_top, container, false);
@@ -80,6 +81,9 @@ public class TopFragment extends Fragment {
 
                 } else { // 구매하는 페이지로 넘어가기
 
+                    // Action으로 Fragment 전환
+                    Navigation.findNavController(v).navigate(R.id.action_nav_top_to_nav_buy);
+
                     Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
 
                 }
@@ -101,6 +105,8 @@ public class TopFragment extends Fragment {
                     Toast.makeText(getActivity(), "옵션을 선택해주세요.", Toast.LENGTH_LONG).show();
 
                 } else { // 장바구니에 담기는 동작
+
+                    Navigation.findNavController(v).navigate(R.id.action_nav_top_to_nav_cart);
 
                     Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
 

@@ -1,4 +1,4 @@
-package org.techtown.push.ui.bottom;
+package org.techtown.push.ui.full;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,22 +17,22 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import org.techtown.push.R;
+import org.techtown.push.ui.bottom.BottomViewModel;
+import org.techtown.push.ui.cart.CartViewModel;
 import org.techtown.push.ui.top.CustomOnItemSelectedListener;
-import org.techtown.push.ui.top.TopViewModel;
 
-public class BottomFragment extends Fragment {
+public class FullFragment extends Fragment {
 
-    private BottomViewModel bottomViewModel;
+    private FullViewModel fullViewModel;
 
     private Spinner spinner;
 
-
     public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        bottomViewModel = ViewModelProviders.of(this).get(BottomViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_bottom, container, false);
+        fullViewModel = ViewModelProviders.of(this).get(FullViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_full, container, false);
 
-        spinner = root.findViewById(R.id.planets_spinner_d);
+        spinner = root.findViewById(R.id.planets_spinner_f);
         spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
 
         /* 기존에 있던 코드. 이 프래그먼트가 보여질 때, TopViewModel에 설정되어 있는 텍스트를
@@ -66,7 +66,7 @@ public class BottomFragment extends Fragment {
         */
 
         // 구매하기 버튼에 대한 동작
-        Button button = root.findViewById(R.id.sell_button_d);
+        Button button = root.findViewById(R.id.sell_button_f);
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -79,7 +79,7 @@ public class BottomFragment extends Fragment {
                 } else { // 구매하는 페이지로 넘어가기
 
                     // Action으로 Fragment 전환
-                    Navigation.findNavController(v).navigate(R.id.action_nav_bottom_to_nav_buy);
+                    Navigation.findNavController(v).navigate(R.id.action_nav_full_to_nav_buy);
 
                     Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
 
@@ -91,7 +91,7 @@ public class BottomFragment extends Fragment {
 
 
         // 장바구니 담기버튼에 대한 동작
-        Button button2 = root.findViewById(R.id.cart_button_d);
+        Button button2 = root.findViewById(R.id.cart_button_f);
         button2.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -103,7 +103,7 @@ public class BottomFragment extends Fragment {
 
                 } else { // 장바구니에 담기는 동작
 
-                    Navigation.findNavController(v).navigate(R.id.action_nav_bottom_to_nav_cart);
+                    Navigation.findNavController(v).navigate(R.id.action_nav_full_to_nav_cart);
 
                     Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
 
