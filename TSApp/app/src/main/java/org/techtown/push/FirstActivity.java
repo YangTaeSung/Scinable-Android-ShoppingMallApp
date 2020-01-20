@@ -79,6 +79,8 @@ public class FirstActivity extends AppCompatActivity {
         String userId = "";
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        /**** FirebaseAuth.getInstance().signOut();  Firebase 로그아웃 *****/
+
         if (user != null) {
 
             // 데이터베이스에 참조하여 userName을 가져오기 위해(네비게이션 드로어 헤더에 띄어줌)
@@ -210,11 +212,13 @@ public class FirstActivity extends AppCompatActivity {
         TextView userName_text = (TextView) headView.findViewById(R.id.userName_text);
         TextView userName_text2 = (TextView) headView.findViewById(R.id.userName_text2);
         TextView userEmail_text = (TextView) headView.findViewById(R.id.userEmail_text);
-        userName_text.setText(user.getDisplayName());
-        if(user.getDisplayName()!=null) {
+
+        if(user!=null) {
+            userName_text.setText(user.getDisplayName());
             userName_text2.setText(" 님");
+            userEmail_text.setText(user.getEmail());
         }
-        userEmail_text.setText(user.getEmail());
+
 
     }
 

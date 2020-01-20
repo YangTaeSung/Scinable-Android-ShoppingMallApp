@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import org.techtown.push.R;
 import org.techtown.push.ui.bottom.BottomViewModel;
 
@@ -19,18 +22,22 @@ public class BuyFragment extends Fragment {
 
     private BuyViewModel buyViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        buyViewModel =
-                ViewModelProviders.of(this).get(BuyViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        buyViewModel = ViewModelProviders.of(this).get(BuyViewModel.class);
         View root = inflater.inflate(R.layout.fragment_buy, container, false);
-        final TextView textView = root.findViewById(R.id.text_buy);
-        buyViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        TextView textView = root.findViewById(R.id.text_buy);
+        textView.setText(getArguments().getString("Selected item"));
+
+        TextView textView2 = root.findViewById(R.id.text_buy2);
+        textView2.setText("Name : " + user.getDisplayName());
+
+        TextView textView3 = root.findViewById(R.id.text_buy3);
+        textView3.setText("Email : " + user.getEmail());
+
         return root;
     }
 }

@@ -58,6 +58,18 @@
     </fragment>
 
     <fragment
+        android:id="@+id/nav_full"
+        android:name="org.techtown.push.ui.full.FullFragment"
+        tools:layout="@layout/fragment_full" >
+        <action
+            android:id="@+id/action_nav_full_to_nav_cart"
+            app:destination="@id/nav_cart" />
+        <action
+            android:id="@+id/action_nav_full_to_nav_buy"
+            app:destination="@id/nav_buy" />
+    </fragment>
+
+    <fragment
         android:id="@+id/nav_share"
         android:name="org.techtown.push.ui.share.ShareFragment"
         android:label="@string/menu_share"
@@ -79,17 +91,6 @@
         android:name="org.techtown.push.ui.buy.BuyFragment"
         tools:layout="@layout/fragment_buy" />
 
-    <fragment
-        android:id="@+id/nav_full"
-        android:name="org.techtown.push.ui.full.FullFragment"
-        tools:layout="@layout/fragment_full" >
-        <action
-            android:id="@+id/action_nav_full_to_nav_cart"
-            app:destination="@id/nav_cart" />
-        <action
-            android:id="@+id/action_nav_full_to_nav_buy"
-            app:destination="@id/nav_buy" />
-    </fragment>
 
 
 

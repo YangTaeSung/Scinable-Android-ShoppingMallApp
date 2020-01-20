@@ -79,7 +79,10 @@ public class FullFragment extends Fragment {
                 } else { // 구매하는 페이지로 넘어가기
 
                     // Action으로 Fragment 전환
-                    Navigation.findNavController(v).navigate(R.id.action_nav_full_to_nav_buy);
+                    String spinnerItem = spinner.getSelectedItem().toString();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Selected item", spinnerItem);
+                    Navigation.findNavController(v).navigate(R.id.action_nav_full_to_nav_buy,bundle);
 
                     Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
 

@@ -6,14 +6,14 @@ import androidx.lifecycle.ViewModel;
 
 public class BuyViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+private MutableLiveData<String> mText;
 
-    public BuyViewModel() {
+public BuyViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is buy fragment");
-    }
+        }
 
-    public LiveData<String> getText() {
+public LiveData<String> getText() {
         return mText;
-    }
-}
+        }
+        }

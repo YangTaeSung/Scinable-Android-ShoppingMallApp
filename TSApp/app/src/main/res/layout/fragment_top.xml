@@ -34,7 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="317dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/g1" />
+                    app:srcCompat="@drawable/premium1" />
 
                 <TextView
                     android:id="@+id/textView6"
@@ -95,29 +95,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/g1" />
+                app:srcCompat="@drawable/premium2" />
 
             <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="새차멘트2"
-        android:textAlignment="center" />
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="새차멘트2"
+            android:textAlignment="center" />
 
             <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/g1" />
+            android:id="@+id/imageView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/premium3" />
 
             <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="match_parent"
-        android:layout_height="292dp"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/g0ff" />
+            android:id="@+id/imageView10"
+            android:layout_width="match_parent"
+            android:layout_height="292dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/g0ff" />
+
         </LinearLayout>
 
     </ScrollView>

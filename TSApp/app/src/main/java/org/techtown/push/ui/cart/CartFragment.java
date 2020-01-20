@@ -19,18 +19,11 @@ public class CartFragment extends Fragment {
 
     private CartViewModel cartViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        cartViewModel =
-                ViewModelProviders.of(this).get(CartViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        cartViewModel = ViewModelProviders.of(this).get(CartViewModel.class);
         View root = inflater.inflate(R.layout.fragment_cart, container, false);
-        final TextView textView = root.findViewById(R.id.text_cart);
-        cartViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
         return root;
     }
 }
