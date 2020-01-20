@@ -1,5 +1,6 @@
 package org.techtown.push.ui.shoes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.techtown.push.Cart;
+import org.techtown.push.MainActivity;
 import org.techtown.push.R;
 import org.techtown.push.ui.top.CustomOnItemSelectedListener;
 import org.techtown.push.ui.top.TopViewModel;
@@ -26,6 +34,8 @@ public class ShoesFragment extends Fragment {
 
     private Spinner spinner;
 
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -106,9 +116,24 @@ public class ShoesFragment extends Fragment {
 
                 } else { // 장바구니에 담기는 동작
 
+                    // 로그인이 되어있는 상태일 때
+                    if(FirebaseAuth.getInstance().getCurrentUser() != null) {
+
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                        Cart cart = new Cart(spinner.getSelectedItem().toString());
+                        databaseReference.child("users").child(user.getEmail().replace(".","_")).child("cart").setValue(cart);
+
                     Navigation.findNavController(v).navigate(R.id.action_nav_shoes_to_nav_cart);
 
                     Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
+                    } else  // 로그인이 되어있지 않으면 로그인 페이지(MainActivity)로 이동
+                    {
+
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        startActivity(intent);
+
+                    }
 
                 }
 

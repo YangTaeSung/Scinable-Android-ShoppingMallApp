@@ -124,8 +124,8 @@ public class TopFragment extends Fragment {
 
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                        Cart cart = new Cart(spinner.getSelectedItem().toString());
-                        databaseReference.child("users").child(user.getEmail().replace(".","_")).child("cart").setValue(cart);
+                        // Cart cart = new Cart(spinner.getSelectedItem().toString());
+                        databaseReference.child("users").child(user.getEmail().replace(".","_")).child("cart").setValue(spinner.getSelectedItem().toString());
 
                         Navigation.findNavController(v).navigate(R.id.action_nav_top_to_nav_cart);
 
