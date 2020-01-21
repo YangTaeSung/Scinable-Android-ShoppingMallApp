@@ -2,7 +2,7 @@ package org.techtown.push;
 
 public class Cart {
 
-    public String cartList;
+    private String cartList;
 
     public Cart() {
 
@@ -14,4 +14,9 @@ public class Cart {
 
     }
 
+    public String getCartList() {
+
+        return cartList;
+
+    }
 }

@@ -1,5 +1,6 @@
 package org.techtown.push.ui.full;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,12 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.techtown.push.MainActivity;
 import org.techtown.push.R;
 import org.techtown.push.ui.bottom.BottomViewModel;
 import org.techtown.push.ui.cart.CartViewModel;
@@ -26,6 +33,9 @@ public class FullFragment extends Fragment {
     private FullViewModel fullViewModel;
 
     private Spinner spinner;
+
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -100,18 +110,28 @@ public class FullFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(String.valueOf(spinner.getSelectedItem()).equals("선택")) { // 스피너의 옵션을 선택하지 않은 경우
+                if (String.valueOf(spinner.getSelectedItem()).equals("선택")) { // 스피너의 옵션을 선택하지 않은 경우
 
                     Toast.makeText(getActivity(), "옵션을 선택해주세요.", Toast.LENGTH_LONG).show();
 
                 } else { // 장바구니에 담기는 동작
 
-                    Navigation.findNavController(v).navigate(R.id.action_nav_full_to_nav_cart);
+                    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
 
-                    Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+                        databaseReference.child("users").child(user.getEmail().replace(".", "_")).child("cart").push().setValue(spinner.getSelectedItem().toString());
+
+                        Navigation.findNavController(v).navigate(R.id.action_nav_full_to_nav_cart);
+
+                        Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
+
+                    } else {
+
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        startActivity(intent);
+                    }
                 }
-
             }
 
         });
