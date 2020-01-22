@@ -6,15 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,12 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.techtown.push.Cart;
-import org.techtown.push.FirstActivity;
 import org.techtown.push.R;
-import org.techtown.push.ui.buy.BuyViewModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,22 +47,15 @@ public class CartFragment extends Fragment {
         listView.setAdapter(adapter);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        databaseReference.child("users").child(user.getEmail().replace(".","_")).child("cart").addValueEventListener(new ValueEventListener() {
+        databaseReference.child(user.getEmail().replace(".","_")).child("cart").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                Log.e("get Key", dataSnapshot.getKey());
-                //for(DataSnapshot fileSnapshot : dataSnapshot.getChildren()) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
 
+                    Log.d("get Value", "ValueEventListener: " + child.getValue());
 
-
-                    /*FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                    String str = fileSnapshot.child("users").child(user.getEmail().replace(".","_")).child("cart").getValue(String.class);
-                    fileList.add(str);*/
-              //  }
-
-                //adapter.notifyDataSetChanged();
+                }
 
             }
 

@@ -19,7 +19,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.techtown.push.Cart;
 import org.techtown.push.MainActivity;
 import org.techtown.push.R;
 
@@ -116,9 +115,7 @@ public class TopFragment extends Fragment {
 
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                        Cart cart = new Cart(spinner.getSelectedItem().toString());
-
-                        databaseReference.child("users").child(user.getEmail().replace(".","_")).child("cart").push().setValue(cart);
+                        databaseReference.child("users").child(user.getEmail().replace(".","_")).child("cart").push().setValue(spinner.getSelectedItem().toString());
 
                         Navigation.findNavController(v).navigate(R.id.action_nav_top_to_nav_cart);
 
