@@ -34,7 +34,7 @@ import org.techtown.push.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
+public class CartFragment extends Fragment {
 
     private CartViewModel cartViewModel;
 
@@ -61,12 +61,12 @@ public class CartFragment extends Fragment implements CompoundButton.OnCheckedCh
         linearMain = (LinearLayout)root.findViewById(R.id.linear_main);
         valueList = new ArrayList<String>();
 
+        totalPrice = 0;
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference.child(user.getEmail().replace(".","_")).child("cart").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                totalPrice = 0;
 
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
 
@@ -81,10 +81,21 @@ public class CartFragment extends Fragment implements CompoundButton.OnCheckedCh
                     checkBox = new CheckBox(getActivity());
                     checkBox.setId(i);
                     totalPrice += CalculateTotalCosts(valueList.get(i));
-                    checkListPrice[i] = CalculateTotalCosts(valueList.get(i)); // 이거 오류. 뭔 단위가 안맞나봐
                     checkBox.setText(valueList.get(i));
                     checkBox.setChecked(true);
-                    checkBox.setOnClickListener(getOnClickDoSomething(checkBox));
+                    checkBox.setOnClickListener(getOnClickDoSomething(checkBox, totalCosts));
+                    /*checkBox.setOnClickListener((new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+
+                            Log.d("checkBox", "id" + v.getId());
+                            int totalPriceChanged = totalPrice - CalculateTotalCosts(valueList.get(v.getId()));
+                            totalCosts.setText("총 주문금액 : " + totalPriceChanged + "원");
+
+                        }
+
+                    }));*/
                     linearMain.addView(checkBox);
 
                 }
@@ -103,21 +114,27 @@ public class CartFragment extends Fragment implements CompoundButton.OnCheckedCh
 
     }
 
+
     // CheckBox의 클릭리스너
-    View.OnClickListener getOnClickDoSomething(final Button button) {
+    View.OnClickListener getOnClickDoSomething(final Button button, final TextView textView) {
 
         return new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                Log.d("checkBox", "id" + button.getId());
+                // Log.d("checkBox", "id" + button.getId());
+                int totalPriceChanged = totalPrice - CalculateTotalCosts(button.getText().toString());
+                totalPrice = totalPriceChanged;
+                textView.setText("총 주문금액 : " + totalPriceChanged + "원");
+
 
             }
 
         };
 
     }
+
 
     public int CalculateTotalCosts(String productName) {
 
@@ -130,12 +147,6 @@ public class CartFragment extends Fragment implements CompoundButton.OnCheckedCh
         substr = productName.substring(start+1,end-1);
 
         return Integer.parseInt(substr);
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-        //체크가 해제되면 다시 온데이타체인지까지 넘겨서 다시 계산하게 해야돼
 
     }
 
