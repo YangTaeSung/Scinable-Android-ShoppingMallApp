@@ -60,48 +60,46 @@ public class CartFragment extends Fragment {
         cartViewModel = ViewModelProviders.of(this).get(CartViewModel.class);
         View root = inflater.inflate(R.layout.fragment_cart, container, false);
 
+        final TextView totalCosts = (TextView) root.findViewById(R.id.text_totalCosts);
+        final Button deleteButton = (Button) root.findViewById(R.id.button2);
+
+        linearMain = (LinearLayout)root.findViewById(R.id.linear_main);
+        valueList = new ArrayList<String>();
+        keyList = new ArrayList<String>();
+        checkBoxes = new ArrayList<CheckBox>();
+
+        totalPrice = 0;
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        databaseReference.child(user.getEmail().replace(".","_")).child("cart").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-        if(user!=null) {
-            final TextView totalCosts = (TextView) root.findViewById(R.id.text_totalCosts);
-            final Button deleteButton = (Button) root.findViewById(R.id.button2);
+                linearMain.removeAllViews();
+                valueList.clear();
+                keyList.clear();
+                checkBoxes.clear();
+                totalPrice = 0;
 
-            linearMain = (LinearLayout) root.findViewById(R.id.linear_main);
-            valueList = new ArrayList<String>();
-            keyList = new ArrayList<String>();
-            checkBoxes = new ArrayList<CheckBox>();
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
 
-            totalPrice = 0;
+                    valueList.add(child.getValue(String.class));
+                    keyList.add(child.getKey());
 
-            databaseReference.child(user.getEmail().replace(".", "_")).child("cart").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Log.d("get Key", child.getKey());
+                    Log.d("get Value", child.getValue(String.class));
 
-                    linearMain.removeAllViews();
-                    valueList.clear();
-                    keyList.clear();
-                    checkBoxes.clear();
-                    totalPrice = 0;
+                }
 
-                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                for(int i = 0; i < valueList.size(); i++) {
 
-                        valueList.add(child.getValue(String.class));
-                        keyList.add(child.getKey());
-
-                        Log.d("get Key", child.getKey());
-                        Log.d("get Value", child.getValue(String.class));
-
-                    }
-
-                    for (int i = 0; i < valueList.size(); i++) {
-
-                        checkBox = new CheckBox(mContext);
-                        checkBox.setId(i);
-                        totalPrice += CalculateTotalCosts(valueList.get(i));
-                        checkBox.setText(valueList.get(i));
-                        checkBox.setChecked(true);
-                        checkBox.setOnClickListener(getOnClickDoSomething(checkBox, totalCosts));
-                        checkBoxes.add(checkBox);
+                    checkBox = new CheckBox(mContext);
+                    checkBox.setId(i);
+                    totalPrice += CalculateTotalCosts(valueList.get(i));
+                    checkBox.setText(valueList.get(i));
+                    checkBox.setChecked(true);
+                    checkBox.setOnClickListener(getOnClickDoSomething(checkBox, totalCosts));
+                    checkBoxes.add(checkBox);
                     /*
                         checkBox.setOnClickListener((new View.OnClickListener() {
 
@@ -116,27 +114,21 @@ public class CartFragment extends Fragment {
 
                     }));
                     */
-                        linearMain.addView(checkBox);
-
-                    }
-
-                    totalCosts.setText("총 주문금액 : " + totalPrice + "원");
-
-                    deleteButton.setOnClickListener(getOnClickDeleteListener(checkBoxes, databaseReference, keyList));
+                    linearMain.addView(checkBox);
 
                 }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                totalCosts.setText("총 주문금액 : " + totalPrice + "원");
 
-                }
-            });
-        } else {
+                deleteButton.setOnClickListener(getOnClickDeleteListener(checkBoxes, databaseReference, keyList));
 
-            Intent intent = new Intent(getContext(),MainActivity.class);
-            startActivity(intent);
+            }
 
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         return root;
 
