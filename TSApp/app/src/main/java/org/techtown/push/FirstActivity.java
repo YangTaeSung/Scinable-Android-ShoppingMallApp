@@ -54,6 +54,7 @@ import org.techtown.push.ui.bottom.BottomFragment;
 import org.techtown.push.ui.cart.CartFragment;
 import org.techtown.push.ui.main.MainFragment;
 import org.techtown.push.ui.main.MainViewModel;
+import org.techtown.push.ui.top.TopViewModel;
 
 public class FirstActivity extends AppCompatActivity {
 
@@ -78,8 +79,6 @@ public class FirstActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         String userId = "";
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        /**** FirebaseAuth.getInstance().signOut();  Firebase 로그아웃 *****/
 
         if (user != null) {
 
@@ -219,7 +218,6 @@ public class FirstActivity extends AppCompatActivity {
             userEmail_text.setText(user.getEmail());
         }
 
-
     }
 
 
@@ -244,12 +242,22 @@ public class FirstActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         switch (item.getItemId()) {
 
             case R.id.action_mypage:
-                Intent intent = new Intent(this,MainActivity.class);
-                startActivity(intent);
+                if(user!=null) {
+
+                    Intent intent = new Intent(this, MypageActivity.class);
+                    startActivity(intent);
+
+                } else {
+
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         ActionBar ab = getSupportActionBar() ;
-        ab.setTitle("201Garage 회원가입") ;
+        ab.setTitle("201Garage Sign Up") ;
 
         mAuth = FirebaseAuth.getInstance();
 

@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         setContentView(R.layout.activity_main);
 
         ActionBar ab = getSupportActionBar() ;
-        ab.setTitle("201Garage 로그인") ;
+        ab.setTitle("201Garage SignIn") ;
 
         //---------------------------------Google login--------------------------------------------//
 
