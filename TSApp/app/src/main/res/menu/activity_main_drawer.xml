@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_outer"
-            android:icon="@drawable/outer"
+            android:icon="@drawable/intro"
             android:title="@string/menu_outer" />
     </group>
 
@@ -14,19 +14,19 @@
         <menu>
         <item
             android:id="@+id/nav_top"
-            android:icon="@drawable/top"
+            android:icon="@drawable/clean1"
             android:title="@string/menu_top" />
         <item
             android:id="@+id/nav_bottom"
-            android:icon="@drawable/bottom"
+            android:icon="@drawable/clean2"
             android:title="@string/menu_bottom" />
         <item
             android:id="@+id/nav_shoes"
-            android:icon="@drawable/shoes"
+            android:icon="@drawable/clean3"
             android:title="@string/menu_shoes" />
             <item
                 android:id="@+id/nav_full"
-                android:icon="@drawable/ic_menu_gallery"
+                android:icon="@drawable/clean4"
                 android:title="@string/menu_full" />
 
         </menu>
@@ -37,11 +37,11 @@
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/notice"
                 android:title="@string/menu_share" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/question"
                 android:title="문의사항" />
         </menu>
     </item>

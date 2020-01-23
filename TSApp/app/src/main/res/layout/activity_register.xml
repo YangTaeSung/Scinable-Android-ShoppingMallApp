@@ -79,13 +79,14 @@
 
         <ImageView
             android:id="@+id/imageView13"
-            android:layout_width="375dp"
-            android:layout_height="195dp"
+            android:layout_width="407dp"
+            android:layout_height="218dp"
+            android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.686"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/chihuahua" />
+            app:srcCompat="@drawable/parrot" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
