@@ -1,5 +1,6 @@
 package org.techtown.push.ui.buy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.techtown.push.MainActivity;
 import org.techtown.push.R;
 import org.techtown.push.ui.bottom.BottomViewModel;
 
@@ -29,14 +31,15 @@ public class BuyFragment extends Fragment {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        TextView textView = root.findViewById(R.id.text_buy);
-        textView.setText(getArguments().getString("Selected item"));
+            TextView textView = root.findViewById(R.id.text_buy);
+            textView.setText(getArguments().getString("Selected item"));
 
-        TextView textView2 = root.findViewById(R.id.text_buy2);
-        textView2.setText("Name : " + user.getDisplayName());
+            TextView textView2 = root.findViewById(R.id.text_buy2);
 
-        TextView textView3 = root.findViewById(R.id.text_buy3);
-        textView3.setText("Email : " + user.getEmail());
+            textView2.setText("Name : " + user.getDisplayName());
+
+            TextView textView3 = root.findViewById(R.id.text_buy3);
+            textView3.setText("Email : " + user.getEmail());
 
         return root;
     }

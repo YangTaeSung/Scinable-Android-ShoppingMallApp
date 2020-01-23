@@ -87,15 +87,21 @@ public class FullFragment extends Fragment {
                     Toast.makeText(getActivity(), "옵션을 선택해주세요.", Toast.LENGTH_LONG).show();
 
                 } else { // 구매하는 페이지로 넘어가기
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if(user!=null) {
+                        // Action으로 Fragment 전환
+                        String spinnerItem = spinner.getSelectedItem().toString();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("Selected item", spinnerItem);
+                        Navigation.findNavController(v).navigate(R.id.action_nav_full_to_nav_buy, bundle);
 
-                    // Action으로 Fragment 전환
-                    String spinnerItem = spinner.getSelectedItem().toString();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Selected item", spinnerItem);
-                    Navigation.findNavController(v).navigate(R.id.action_nav_full_to_nav_buy,bundle);
+                        Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
+                    } else {
 
-                    Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        startActivity(intent);
 
+                    }
                 }
 
             }

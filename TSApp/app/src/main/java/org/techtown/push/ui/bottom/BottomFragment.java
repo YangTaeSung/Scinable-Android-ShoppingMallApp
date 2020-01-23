@@ -87,14 +87,21 @@ public class BottomFragment extends Fragment {
 
                 } else { // 구매하는 페이지로 넘어가기
 
-                    // Action으로 Fragment 전환
-                    String spinnerItem = spinner.getSelectedItem().toString();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Selected item", spinnerItem);
-                    Navigation.findNavController(v).navigate(R.id.action_nav_bottom_to_nav_buy,bundle);
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if(user!=null) {
+                        // Action으로 Fragment 전환
+                        String spinnerItem = spinner.getSelectedItem().toString();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("Selected item", spinnerItem);
+                        Navigation.findNavController(v).navigate(R.id.action_nav_bottom_to_nav_buy, bundle);
 
-                    Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "good", Toast.LENGTH_LONG).show();
+                    } else {
 
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        startActivity(intent);
+
+                    }
                 }
 
             }
